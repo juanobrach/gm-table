@@ -10,6 +10,7 @@ const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
 const sourcemaps = require('gulp-sourcemaps');
 const babel = require('gulp-babel');
+const runSequence = require('run-sequence');
 
 /**
  * Global Variables section
@@ -57,8 +58,21 @@ const scripts = () => {
 }
 
 /**
+ * build Function
+ * Provide Sequence for run in order 
+ */
+const build = (callback) => {
+  runSequence(
+    'styles',
+    'scripts',
+    callback);
+}
+
+/**
  * Gulp Tasks
  */
 
 gulp.task('styles', styles);
 gulp.task('scripts', scripts);
+gulp.task('build', build);
+gulp.task('default', build);
