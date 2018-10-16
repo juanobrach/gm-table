@@ -30,6 +30,9 @@ var paths = {
   }
 };
 
+/**
+ * Handle browser Sync functions
+ */
 const live = () => {
   browserSync.init({
     server: {
@@ -43,7 +46,6 @@ const live = () => {
     open: true,
     cors: true,
     notify: true
-
   });
 }
 
