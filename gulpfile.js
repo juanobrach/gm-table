@@ -27,6 +27,10 @@ var paths = {
     src: `${dirs.src}/scripts/script.js`,
     dest: `${dirs.dest}/scripts/`,
     wildcard: `${dirs.src}/scripts/**/*.js`
+  },
+  templates: {
+    src: `${dirs.src}/templates/index.html`,
+    dest: dirs.dest,
   }
 };
 
@@ -36,7 +40,7 @@ var paths = {
 const live = () => {
   browserSync.init({
     server: {
-      baseDir: "./src/templates",
+      baseDir: "./build",
       index: "index.html",
       directory: false,
       https: false,
@@ -75,11 +79,20 @@ const scripts = () => {
 }
 
 /**
+ * Template handler
+ */
+const templates = () => {
+  return gulp.src(paths.templates.src)
+    .pipe(gulp.dest(paths.templates.dest))
+}
+
+/**
  * Gulp task watch usefull in development time
  */
 const watch = () => {
-  gulp.watch(paths.styles.wildcard, ['styles']);
-  gulp.watch(paths.scripts.wildcard, ['scripts']);
+  gulp.watch(paths.styles.wildcard, ['styles']).on('change', browserSync.reload);;
+  gulp.watch(paths.scripts.wildcard, ['scripts']).on('change', browserSync.reload);;
+  gulp.watch(paths.templates.src, ['templates']).on('change', browserSync.reload);;
 }
 
 /**
@@ -111,6 +124,7 @@ const dev = (callback) => {
 gulp.task('live', live);
 gulp.task('styles', styles);
 gulp.task('scripts', scripts);
+gulp.task('templates', templates);
 gulp.task('build', build);
 gulp.task('watch', watch);
 gulp.task('dev', dev);
