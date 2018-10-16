@@ -6,6 +6,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const sourcemaps = require('gulp-sourcemaps');
 const babel = require('gulp-babel');
 const runSequence = require('run-sequence');
+const browserSync = require('browser-sync').create();
 
 /**
  * Global Variables section
@@ -28,6 +29,23 @@ var paths = {
     wildcard: `${dirs.src}/scripts/**/*.js`
   }
 };
+
+const live = () => {
+  browserSync.init({
+    server: {
+      baseDir: "./src/templates",
+      index: "index.html",
+      directory: false,
+      https: false,
+    },
+    watch: true,
+    port: 8083,
+    open: true,
+    cors: true,
+    notify: true
+
+  });
+}
 
 /**
  * Styles section
@@ -79,6 +97,7 @@ const build = (callback) => {
 const dev = (callback) => {
   runSequence(
     'build',
+    'live',
     'watch',
     callback);
 }
@@ -87,6 +106,7 @@ const dev = (callback) => {
  * Gulp Tasks
  */
 
+gulp.task('live', live);
 gulp.task('styles', styles);
 gulp.task('scripts', scripts);
 gulp.task('build', build);
