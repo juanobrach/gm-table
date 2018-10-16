@@ -1,8 +1,3 @@
-/**
- * Node already supports a lot of ES2015,
- * to avoid compatibility problem we suggest to install Babel
- * and rename your gulpfile.js as gulpfile.babel.js.
- */
 'use strict';
 
 const gulp = require('gulp');
@@ -24,11 +19,13 @@ const dirs = {
 var paths = {
   styles: {
     src: `${dirs.src}/styles/style.scss`,
-    dest: `${dirs.dest}/styles/`
+    dest: `${dirs.dest}/styles/`,
+    wildcard: `${dirs.src}/styles/**/*.scss`
   },
   scripts: {
     src: `${dirs.src}/scripts/script.js`,
-    dest: `${dirs.dest}/scripts/`
+    dest: `${dirs.dest}/scripts/`,
+    wildcard: `${dirs.src}/scripts/**/*.js`
   }
 };
 
@@ -58,6 +55,14 @@ const scripts = () => {
 }
 
 /**
+ * Gulp task watch usefull in development time
+ */
+const watch = () => {
+  gulp.watch(paths.styles.wildcard, ['styles']);
+  gulp.watch(paths.scripts.wildcard, ['scripts']);
+}
+
+/**
  * build Function
  * Provide Sequence for run in order 
  */
@@ -69,10 +74,22 @@ const build = (callback) => {
 }
 
 /**
+ * In development time use this task, it will proviede watch and other stuff
+ */
+const dev = (callback) => {
+  runSequence(
+    'build',
+    'watch',
+    callback);
+}
+
+/**
  * Gulp Tasks
  */
 
 gulp.task('styles', styles);
 gulp.task('scripts', scripts);
 gulp.task('build', build);
+gulp.task('watch', watch);
+gulp.task('dev', dev);
 gulp.task('default', build);
