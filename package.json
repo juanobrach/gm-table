@@ -1,0 +1,27 @@
+{
+  "name": "boilerplate-gulp-sass-bable",
+  "version": "1.0.0",
+  "description": "A boilerplate for rapid front-end development",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devlifeX/boilerplate-gulp-sass-babel.git"
+  },
+  "keywords": [
+    "boilerplate",
+    "scss",
+    "sass",
+    "es6",
+    "babel",
+    "front-end"
+  ],
+  "author": "dariushvesal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devlifeX/boilerplate-gulp-sass-babel/issues"
+  },
+  "homepage": "https://github.com/devlifeX/boilerplate-gulp-sass-babel#readme"
+}
