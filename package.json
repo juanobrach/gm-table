@@ -23,5 +23,13 @@
   "bugs": {
     "url": "https://github.com/devlifeX/boilerplate-gulp-sass-babel/issues"
   },
-  "homepage": "https://github.com/devlifeX/boilerplate-gulp-sass-babel#readme"
+  "homepage": "https://github.com/devlifeX/boilerplate-gulp-sass-babel#readme",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "browser-sync": "^2.26.3",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^8.0.0",
+    "gulp-sass": "^4.0.2"
+  }
 }
