@@ -103,6 +103,7 @@ const build = (callback) => {
   runSequence(
     'styles',
     'scripts',
+    'templates',
     callback);
 }
 
