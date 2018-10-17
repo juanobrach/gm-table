@@ -61,6 +61,10 @@ const styles = () => {
   return gulp.src(paths.styles.src)
     .pipe(sourcemaps.init())
     .pipe(sass.sync())
+    .on('error', function (err) {
+      console.log(err.toString());
+      this.emit('end');
+    })
     .pipe(autoprefixer())
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(paths.styles.dest));
@@ -75,6 +79,10 @@ const scripts = () => {
     .pipe(babel({
       presets: ['@babel/env']
     }))
+    .on('error', function (err) {
+      console.log(err.toString());
+      this.emit('end');
+    })
     .pipe(gulp.dest(paths.scripts.dest))
 }
 
