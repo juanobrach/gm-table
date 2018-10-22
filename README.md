@@ -14,5 +14,6 @@ $ gulp dev
 2- Support Sass(SCSS)  
 3- Support ES6+ (Babel)  
 4- Support BrowserSync  
-5- Live reload any changes in (html, scss, js files), prevent crash while coding  
+5- Support Browserify (So You can write module import/export in your js file)  
+6- Live reload any changes in (html, scss, js files), prevent crash while coding  
 n- What dou you want? leave an issue :)  
