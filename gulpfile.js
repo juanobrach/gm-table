@@ -87,10 +87,6 @@ const scripts = () => {
   });
 
   return b.bundle()
-    /* .pipe(babel({
-      presets: ['@babel/env'],
-
-    })) */
     .on('error', function (err) {
       console.log(err.toString());
       this.emit('end');
@@ -103,9 +99,9 @@ const scripts = () => {
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.scripts.dest));
 
-
-
-  /* return gulp.src(paths.scripts.src)
+  /* 
+  // Uncomment when you want use only bable and mulitple files together
+  return gulp.src(paths.scripts.src)
     .pipe(babel({
       presets: ['@babel/env'],
 
