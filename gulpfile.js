@@ -7,7 +7,9 @@ const sourcemaps = require('gulp-sourcemaps');
 const babel = require('gulp-babel');
 const runSequence = require('run-sequence');
 const browserSync = require('browser-sync').create();
-
+const browserify = require('browserify');
+const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
 /**
  * Global Variables section
  * In this section we define global variables
@@ -26,7 +28,8 @@ var paths = {
   scripts: {
     src: `${dirs.src}/scripts/script.js`,
     dest: `${dirs.dest}/scripts/`,
-    wildcard: `${dirs.src}/scripts/**/*.js`
+    wildcard: `${dirs.src}/scripts/**/*.js`,
+    dir: `${dirs.src}/scripts/`
   },
   templates: {
     src: `${dirs.src}/templates/index.html`,
@@ -49,7 +52,7 @@ const live = () => {
     port: 8083,
     open: true,
     cors: true,
-    notify: true
+    notify: false
   });
 }
 
@@ -75,15 +78,39 @@ const styles = () => {
  * In this section we define functionality who doing JS stuff ;)
  */
 const scripts = () => {
-  return gulp.src(paths.scripts.src)
-    .pipe(babel({
-      presets: ['@babel/env']
-    }))
+
+  let b = browserify({
+    entries: paths.scripts.src,
+    debug: true,
+    paths: [paths.scripts.dir],
+    extensions: ['es6'],
+  });
+
+  return b.bundle()
+    /* .pipe(babel({
+      presets: ['@babel/env'],
+
+    })) */
     .on('error', function (err) {
       console.log(err.toString());
       this.emit('end');
     })
-    .pipe(gulp.dest(paths.scripts.dest))
+    .pipe(source('script.js'))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({
+      loadMaps: true
+    }))
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest(paths.scripts.dest));
+
+
+
+  /* return gulp.src(paths.scripts.src)
+    .pipe(babel({
+      presets: ['@babel/env'],
+
+    }))
+    .pipe(gulp.dest(paths.scripts.dest)) */
 }
 
 /**
