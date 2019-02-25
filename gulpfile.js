@@ -34,7 +34,11 @@ var paths = {
   templates: {
     src: `${dirs.src}/templates/index.html`,
     dest: dirs.dest,
-  }
+  },
+  images: {
+    src: `${dirs.src}/images/**/*.*`,
+    dest: `${dirs.dest}/images`,
+  },
 };
 
 /**
@@ -118,6 +122,14 @@ const templates = () => {
 }
 
 /**
+ * Images handler
+ */
+const images = () => {
+  return gulp.src(paths.images.src)
+    .pipe(gulp.dest(paths.images.dest))
+}
+
+/**
  * Gulp task watch usefull in development time
  */
 const watch = () => {
@@ -135,6 +147,7 @@ const build = (callback) => {
     'styles',
     'scripts',
     'templates',
+    'images',
     callback);
 }
 
@@ -157,6 +170,7 @@ gulp.task('live', live);
 gulp.task('styles', styles);
 gulp.task('scripts', scripts);
 gulp.task('templates', templates);
+gulp.task('images', images);
 gulp.task('build', build);
 gulp.task('watch', watch);
 gulp.task('dev', dev);
