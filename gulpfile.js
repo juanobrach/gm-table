@@ -10,6 +10,9 @@ const browserSync = require('browser-sync').create();
 const browserify = require('browserify');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
+const xls2json = require('gulp-spreadsheet2json');
+const  rename = require('gulp-rename');
+
 /**
  * Global Variables section
  * In this section we define global variables
@@ -40,6 +43,22 @@ var paths = {
     dest: `${dirs.dest}/images`,
   },
 };
+
+var spreadsheets = [
+  './src/*.xls',
+];
+const convertXls = () =>{
+  gulp.src(spreadsheets)
+  .pipe(xls2json({
+      headRow: 1,
+      valueRowStart: 2,
+      trace: false
+  }))
+  .pipe(rename(function(path) {
+      path.extname = ".json";
+  }))
+  .pipe(gulp.dest('src'));
+}
 
 /**
  * Handle browser Sync functions
@@ -174,4 +193,5 @@ gulp.task('images', images);
 gulp.task('build', build);
 gulp.task('watch', watch);
 gulp.task('dev', dev);
+gulp.task('convertXls', convertXls);
 gulp.task('default', build);

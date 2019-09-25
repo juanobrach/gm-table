@@ -37,8 +37,10 @@
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^6.0.0",
     "gulp-babel": "^8.0.0",
+    "gulp-js-xlsx": "^0.1.0",
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.4",
+    "gulp-spreadsheet2json": "^1.0.6",
     "run-sequence": "^2.2.1",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"
@@ -55,5 +57,9 @@
       ]
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "axios": "^0.19.0",
+    "gulp-rename": "^1.4.0",
+    "xlsx": "^0.15.1"
+  }
 }

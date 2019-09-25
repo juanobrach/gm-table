@@ -1,1 +1,3 @@
-import module from './module';
+import prepareGeneratedJSON from './module';
+
+prepareGeneratedJSON();
